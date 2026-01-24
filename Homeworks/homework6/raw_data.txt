@@ -1,7 +1,7 @@
 Alice, 20, 85
 Bob, twenty, 90
 Charlie, 22
-David, 21, 95
+David, 21,  95
 Eve, 23, 88
 Frank, 22, N/A
 Grace, 20, 100
