@@ -1,0 +1,13 @@
+
+Answer to Q1:
+Supervised learning is when you have labels. Unsupervised is when you don't.
+
+Answer to Q2:
+Overfitting is when the model is too good at the training data and fails on test data.
+
+Answer to Q3:
+I don't know this one.
+
+Answer to Q4:
+def calculate_mean(nums):
+    return sum(nums) / len(nums)
