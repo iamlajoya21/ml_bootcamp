@@ -1,0 +1,49 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --- DATA SETUP ---
+url = "https://raw.githubusercontent.com/bnokoro/Data-Science/master/countries%20of%20the%20world.csv"
+df = pd.read_csv(url)
+
+# Cleaning: Fix decimal commas and strip strings
+cols_to_fix = ['Pop. Density (per sq. mi.)', 'Literacy (%)', 'Phones (per 1000)', 'GDP ($ per capita)', 'Deathrate']
+for col in cols_to_fix:
+    df[col] = df[col].astype(str).str.replace(',', '.').astype(float)
+df['Region'] = df['Region'].str.strip()
+
+# ==========================================
+# TASK 1 (NumPy): Percentiles
+# English: Use NumPy to calculate the 90th percentile of 'Pop. Density (per sq. mi.)'.
+# Հայերեն: Օգտագործեք NumPy-ը՝ հաշվելու 'Pop. Density (per sq. mi.)'-ի 90-րդ պերցենտիլը:
+# ------------------------------------------
+
+# ==========================================
+# TASK 2 (NumPy): Conditional Labeling
+# English: Create a new column 'Wealth_Status' using np.where. 
+# If 'GDP ($ per capita)' > 20000, label it 'High', otherwise 'Developing'.
+# Հայերեն: Ստեղծեք նոր 'Wealth_Status' սյունակ՝ օգտագործելով np.where: 
+# Եթե 'GDP ($ per capita)' > 20000, նշեք 'High', հակառակ դեպքում՝ 'Developing':
+# ------------------------------------------
+
+# ==========================================
+# TASK 3 (Pandas): Multi-Condition Filtering
+# English: Filter the dataframe for countries in 'LATIN AMER. & CARIB' with 'Literacy (%)' > 90.
+# Հայերեն: Զտեք DataFrame-ը 'LATIN AMER. & CARIB' տարածաշրջանի այն երկրների համար, որոնց 'Literacy (%)'-ն բարձր է 90-ից:
+# ------------------------------------------
+
+# ==========================================
+# TASK 4 (Pandas): Grouped Aggregation
+# English: Group by 'Region' and calculate the mean 'Deathrate' for each region.
+# Հայերեն: Խմբավորեք ըստ 'Region'-ի և հաշվեք յուրաքանչյուր տարածաշրջանի 'Deathrate'-ի միջինը:
+# ------------------------------------------
+
+# ==========================================
+# TASK 5 (Matplotlib): Visualization & Annotation
+# English: Create a scatter plot of 'GDP ($ per capita)' vs 'Literacy (%)'.
+# 1. Color points by 'Phones (per 1000)' and add a colorbar.
+# 2. Use plt.annotate to point to 'United States' and label it.
+# Հայերեն: Ստեղծեք 'GDP ($ per capita)'-ի և 'Literacy (%)'-ի scatter plot:
+# 1. Գունավորեք կետերը ըստ 'Phones (per 1000)'-ի և ավելացրեք colorbar:
+# 2. Օգտագործեք plt.annotate՝ 'United States'-ը նշելու և պիտակավորելու համար:
+# ------------------------------------------
