@@ -117,7 +117,7 @@ def grade_submission(student_name, student_code, golden_code):
 def main():
     golden_code = read_file_content(GOLDEN_ANSWERS_FILE)
     submissions = glob.glob(os.path.join(SUBMISSIONS_DIR, "*"))
-    
+    submissions = ["/Users/rafael/Downloads/ml_bootcamp/quizzes/quiz2/exam2_answers/quiz2 - Karen Poghosyan.py"]
     gradebook = []
     
     print(f"Found {len(submissions)} submissions. Starting grading with 60s delay...")
