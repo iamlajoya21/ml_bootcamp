@@ -1,0 +1,262 @@
+Timestamp,Email address,Name and Surname,Solutions
+01/05/2026 15:18:05,nona.zakoyan@gmail.com,Option 1,"SELECT 
+	t.TrackID,
+	t.Name,
+	(RANK() OVER (PARTITION by t.GenreID ORDER BY t.Milliseconds DESC)) as RANK
+FROM Track t
+LEFT JOIN InvoiceLine il ON t.TrackId = il.TrackId
+JOIN PlaylistTrack pt ON t.TrackId = pt.TrackId
+JOIN Playlist p on p.PlaylistId = pt.PlaylistId 
+GROUP BY t.TrackId
+Having il.TrackId IS NULL
+"
+01/05/2026 15:19:44,astghiksaghyan@gmail.com,,"Task 1
+   
+WITH PopTracks AS ( 
+   SELECT 
+    	t.name AS TrackName,
+    	t.TrackId,
+    	g.Name AS GenreName,
+    	p.PlaylistId,
+    	t.Milliseconds,
+    	COUNT(*) AS Count
+    FROM Playlist p
+    JOIN PlaylistTrack pt ON pt.PlaylistId  = p.PlaylistId
+    JOIN Track t ON t.TrackId  = pt.TrackId 
+    JOIN Genre g ON g.GenreId = t.GenreId 
+    GROUP BY p.PlaylistId HAVING (Count > 3)
+   )
+    SELECT *,
+    	RANK() OVER (
+        PARTITION BY GenreName
+        ORDER BY Milliseconds DESC
+    ) AS Rank
+   FROM PopTracks WHERE TrackId NOT IN (SELECT il.TrackId FROM InvoiceLine il );
+"
+01/05/2026 15:21:46,aregayvazyan5@gmail.com,Areg Ayvazyan,"SELECT g.Name AS GenreName,
+	t.Name  AS TrackName,
+	COUNT(pt.PlaylistId) AS playlist_num,
+	RANK() OVER(PARTITION BY t.name ORDER BY t.Milliseconds) AS rank
+FROM Track t 
+JOIN PlaylistTrack pt  ON pt.TrackId = t.TrackId 
+JOIN Genre g ON g.GenreId = t.GenreId 
+GROUP BY pt.TrackId
+HAVING COUNT(pt.PlaylistId) > 3 AND 
+	t.TrackId NOT IN (SELECT i.InvoiceId  FROM Invoice i);
+
+
+WITH MovingAvg AS (
+	SELECT 
+		c.FirstName,
+		c.Country,
+		i.Total,
+		i.InvoiceDate,
+		AVG(i.Total) OVER(PARTITION BY c.CustomerId  ORDER BY i.InvoiceDate ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS Avg_rev
+	FROM Customer c 
+	JOIN Invoice i ON i.CustomerId = c.CustomerId 
+	GROUP BY i.InvoiceId 
+)
+SELECT * FROM  MovingAvg 
+WHERE Total > (1.5 * Avg_rev);"
+01/05/2026 15:22:15,sirunyanarsen23@gmail.com,Arsen Sirunyan,"WITH UnsoldPopularTracks AS (
+    SELECT 
+        t.TrackId,
+        t.Name AS TrackName,
+        g.Name AS GenreName,
+        t.Milliseconds,
+        COUNT(pt.PlaylistId) AS PlaylistCount
+    FROM Track t
+    JOIN Genre g ON t.GenreId = g.GenreId
+    JOIN PlaylistTrack pt ON t.TrackId = pt.TrackId
+    WHERE t.TrackId NOT IN (
+        SELECT TrackId 
+        FROM InvoiceLine
+    )
+    GROUP BY t.TrackId, t.Name, g.Name, t.Milliseconds
+    HAVING COUNT(pt.PlaylistId) > 3
+)
+SELECT 
+    GenreName,
+    TrackName,
+    Milliseconds,
+    PlaylistCount,
+    RANK() OVER (
+        PARTITION BY GenreName 
+        ORDER BY Milliseconds DESC
+    ) as DurationRank
+FROM UnsoldPopularTracks
+ORDER BY GenreName, DurationRank;
+
+
+/////////2/////////////
+WITH Info AS (
+	SELECT FirstName,LastName,Country,i.Total as Total FROM Customer c 
+	JOIN Invoice i ON c.CustomerId = i.CustomerId 
+)
+SELECT 
+    CustomerId,
+    InvoiceId,
+    InvoiceDate,
+    Total,
+    AVG(Total) OVER (
+        PARTITION BY CustomerId 
+        ORDER BY InvoiceDate
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+    ) AS MovingAverage
+FROM Invoice; 
+"
+01/05/2026 15:22:29,gasparyanarmen314@gmail.com,Armen Gasparyan,"Task 1
+SELECT 
+    t.TrackId,
+    t.Name AS TrackName,
+    g.Name AS GenreName,
+    t.Milliseconds,
+    COUNT(pt.PlaylistId) AS PlaylistCount,
+    RANK() OVER (
+        PARTITION BY g.Name 
+        ORDER BY t.Milliseconds DESC
+    ) AS duration_rank
+FROM Track t
+JOIN Genre g ON g.GenreId = t.GenreId
+JOIN PlaylistTrack pt ON pt.TrackId = t.TrackId
+WHERE t.TrackId NOT IN (
+    SELECT DISTINCT il.TrackId 
+    FROM InvoiceLine il
+)
+GROUP BY 
+    t.TrackId, t.Name, g.Name, t.Milliseconds
+HAVING COUNT(pt.PlaylistId) > 3
+ORDER BY g.Name, duration_rank;  "
+01/05/2026 15:22:36,karenpoghosyann04@gmail.com,Karen Poghosyan,"SELECT 
+    t.Name,
+    t.Milliseconds,
+    DENSE_RANK() OVER (ORDER BY t.Milliseconds DESC) AS DurationRank
+FROM Track t
+JOIN PlaylistTrack pt ON t.TrackId = pt.TrackId 
+LEFT JOIN InvoiceLine il ON t.TrackId = il.TrackId
+WHERE il.TrackId IS NULL
+GROUP BY t.TrackId
+HAVING COUNT(pt.PlaylistId) > 3;"
+01/05/2026 15:22:52,parsyannonna07@gmail.com,Nonna Parsyan,"--------1-------
+WITH TempTable AS (
+SELECT
+	t.TrackId, 
+	t.Name AS TrackName,
+	COUNT(*) AS NumberOFPlaylists
+FROM
+	Track t
+JOIN PlaylistTrack pt ON
+	pt.TrackId = t.TrackId
+GROUP BY
+	pt.TrackId,
+	t.Name
+HAVING
+	COUNT(*)>= 3)
+	
+	
+SELECT
+	tt.TrackId, 
+	tt.TrackName,
+	tt.NumberOFPlaylists
+FROM
+	TempTable tt
+LEFT JOIN InvoiceLine il ON
+	il.TrackId = tt.TrackId
+WHERE
+	il.InvoiceId IS NULL;
+
+
+
+---2--
+WITH NewTable AS(
+SELECT
+    c.CustomerId ,
+	c.FirstName ,
+	c.LastName ,
+	c.Country,
+	i.Total
+FROM
+	Invoice i
+JOIN Customer c ON
+	c.CustomerId = i.CustomerId
+
+)
+
+SELECT * ,
+       AVG(nt.Total) OVER (PARTITION BY nt.CustomerId ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS MovingAverage
+FROM NewTable nt
+WHERE nt.Total/MovingAverage  >2;
+"
+01/05/2026 15:22:53,mels.tadevosyan@gmail.com,Option 1,"
+SELECT t.Name as TrackName, t.Milliseconds,
+RANK() OVER (PARTITION BY g.Name ORDER BY t.Milliseconds DESC) AS GenreRank 
+FROM Tracks t
+JOIN playlists p on p.TrackId = t.TrackId
+join genres g on g.GenreId = t.GenreId
+WHERE t.TrackId not in (
+    SELECT TrackId FROM PlaylistTrack
+)
+GROUP BY t.TrackId, t.Name, t.Milliseconds
+HAVING count(t.TrackId)>3;
+
+
+WITH CustomerProfile AS (
+    SELECT c.FirstName as name, c.Country as Country, i.Total as InvoiceTotal, i.InvoiceDate,
+    AVG(i.Total) OVER (PARTITION BY c.CustomerId ORDER BY i.InvoiceDate) AS MovingAverage
+    FROM Customer c
+    JOIN Invoice i ON i.CustomerId = c.CustomerId
+)
+
+SELECT 
+    Name, Country, InvoiceTotal, MovingAverage
+FROM CustomerProfile
+WHERE InvoiceTotal > 1.5 * MovingAverage;"
+01/05/2026 15:22:57,khachatryanharut84@gmail.com,Հարություն Խաչատրյան,"WITH HiddenHits AS (
+    SELECT 
+        t.TrackId, 
+        t.Name AS TrackName, 
+        g.Name AS GenreName, 
+        t.Milliseconds,
+        COUNT(pt.PlaylistId) AS PlaylistCount
+    FROM Track t
+    JOIN PlaylistTrack pt ON t.TrackId = pt.TrackId
+    JOIN Genre g ON t.GenreId = g.GenreId
+    WHERE t.TrackId NOT IN (SELECT TrackId FROM InvoiceLine)
+    GROUP BY t.TrackId
+    HAVING COUNT(pt.PlaylistId) > 3 
+)
+SELECT 
+    GenreName,
+    TrackName,
+    Milliseconds,
+    PlaylistCount,
+    RANK() OVER (PARTITION BY GenreName ORDER BY Milliseconds DESC) AS DurationRank
+FROM HiddenHits
+ORDER BY GenreName, DurationRank;"
+01/05/2026 15:23:15,sargsyan.yulya03@gmail.com,Yulya Sargsyan,"-------------2----------------
+SELECT
+	t.Name AS TrackName,
+	t.Milliseconds,
+	COUNT(pt.PlaylistId) AS countofplaylistid,
+	RANK() OVER (
+        PARTITION BY g.Name
+ORDER BY
+	t.Milliseconds DESC
+    ) AS Rank
+FROM
+	Track t
+JOIN Genre g ON
+	t.GenreId = g.GenreId
+JOIN PlaylistTrack pt ON
+	t.TrackId = pt.TrackId
+WHERE
+	t.TrackId NOT IN (
+	SELECT
+		TrackId
+	FROM
+		InvoiceLine)
+GROUP BY
+	t.Name,
+	t.Milliseconds
+HAVING
+	COUNT(pt.PlaylistId) > 3;"

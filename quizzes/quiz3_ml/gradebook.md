@@ -10,6 +10,13 @@
 | Harut Khachatryan | 10/50 | 50/50 | **60/100** |
 | Armen Barseghyan | 40/50 | 30/50 | **70/100** |
 | Eliza Asatryan | 40/50 | 35/50 | **75/100** |
+| Arsen Sirunyan | 50/50 | 50/50 | **100/100** |
+| Karen Poghosyan | 50/50 | 50/50 | **100/100** |
+| Areg Ayvazyan | 50/50 | 50/50 | **100/100** |
+| Yulya Sargsyan | 50/50 | 50/50 | **100/100** |
+| Armen Gasparyan | 25/50 | 50/50 | **75/100** |
+| Astghik Saghyan | 50/50 | 50/50 | **100/100** |
+| Mariam Mnatsakanyan | 50/50 | 50/50 | **100/100** |
 
 
 ## Detailed Feedback
@@ -65,3 +72,66 @@
 
 **Question 2 (PCA - Wine Dataset): 45/50**
 - **Feedback:** You correctly scaled the data and applied PCA. However, you relied on visually inspecting the cumulative variance plot to guess the number of components ("4 or 5"). You should have written code to programmatically calculate the exact number of components needed to cross the 85% threshold (e.g., using `np.cumsum()` and `np.argmax()`).
+
+---
+
+### 7. Arsen Sirunyan (100/100)
+**Question 1 (Regression - California Housing): 50/50**
+- **Feedback:** Excellent work. You handled all feature engineering tasks correctly, used KNNImputer and StandardScaler, trained an XGBoost model using GridSearchCV, and reported the RMSE for train and test sets.
+
+**Question 2 (PCA - Wine Dataset): 50/50**
+- **Feedback:** Perfect. You standardized the features, applied PCA correctly, and used a programmatic approach to find the number of principal components.
+
+---
+
+### 8. Karen Poghosyan (100/100)
+**Question 1 (Regression - California Housing): 50/50**
+- **Feedback:** Great job. You filled missing values with the median, used OneHotEncoding and scaling appropriately. Your implementation of Linear Regression and Random Forest models was correct, and reporting both train and test RMSE was done well.
+
+**Question 2 (PCA - Wine Dataset): 50/50**
+- **Feedback:** Very well done. Standardizing the features and applying PCA using `n_components=0.85` is a clean way to find the exact number of components. The visual plots were a great addition.
+
+---
+
+### 9. Areg Ayvazyan (100/100)
+**Question 1 (Classification - Heart Disease): 50/50**
+- **Feedback:** Outstanding submission! Your use of GridSearchCV with both Random Forest and XGBoost models was great. You successfully scaled features and reported the ROC-AUC score for both train and test sets. Feature importance plots were a nice touch.
+
+**Question 2 (Clustering - Credit Card): 50/50**
+- **Feedback:** Excellent work. You correctly handled missing values using KNNImputer, scaled the data, and successfully utilized the Elbow method for KMeans. Grouping by cluster to report the mean BALANCE was accurately completed.
+
+---
+
+### 10. Yulya Sargsyan (100/100)
+**Question 1 (Classification - Heart Disease): 50/50**
+- **Feedback:** Good job. You correctly scaled the continuous features and trained a Logistic Regression model. Reporting the ROC-AUC score for both train and test sets using `predict_proba` was accurate.
+
+**Question 2 (Clustering - Credit Card): 50/50**
+- **Feedback:** Very well done. You handled missing values with the median, standardized the data, and applied KMeans clustering. Finding the mean BALANCE per cluster was exactly what was required.
+
+---
+
+### 11. Armen Gasparyan (90/100)
+**Question 1 (Classification - Heart Disease): 40/50**
+- **Feedback:** You successfully split the data and trained classification models. However, you lost points because you did not scale the numerical features as requested. Furthermore, the assignment explicitly asked to choose ROC-AUC as the evaluation metric, but you used F1 score and Accuracy instead.
+
+**Question 2 (Clustering - Credit Card): 50/50**
+- **Feedback:** Great job. You handled missing values appropriately, standardized the data, and applied the KMeans algorithm. Assigning cluster labels and grouping to find the mean for each cluster was perfectly executed.
+
+---
+
+### 12. Astghik Saghyan (100/100)
+**Question 1 (Regression - California Housing): 50/50**
+- **Feedback:** Excellent work! Building a full Pipeline with a ColumnTransformer for preprocessing and an XGBoost Regressor shows a deep understanding of standard machine learning workflows.
+
+**Question 2 (PCA - Wine Dataset): 50/50**
+- **Feedback:** Perfect. You scaled the features, applied PCA correctly with `n_components=0.85`, and accurately determined the number of required components.
+
+---
+
+### 13. Mariam Mnatsakanyan (100/100)
+**Question 1 (Regression - California Housing): 50/50**
+- **Feedback:** Great submission. Using a Pipeline with a ColumnTransformer is an excellent practice. You correctly handled missing values, encoded categorical features, and reported the train and test RMSE for the Random Forest and XGBoost models.
+
+**Question 2 (PCA - Wine Dataset): 50/50**
+- **Feedback:** Very well done. You correctly standardized the features, applied PCA, and used `np.cumsum` to find the exact number of components required to cross the 85% variance threshold.
