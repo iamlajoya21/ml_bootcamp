@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 6
+names: ['bishop', 'king', 'knight', 'pawn', 'queen', 'rook']
+
+roboflow:
+  workspace: somework
+  project: chess-zn1zf
+  version: 1
+  license: Public Domain
+  url: https://universe.roboflow.com/somework/chess-zn1zf/dataset/1

@@ -6,3 +6,13 @@
 *.jpg
 *.mat
 *.uni
+*.jpg
+*.txt
+*.pt
+*.onnx
+*.csv
+*.cache
+*.zip
+*.mp4
+
+

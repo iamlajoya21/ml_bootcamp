@@ -1,0 +1,23 @@
+# data.yaml
+path: ./chess-enjcd-2  # Root directory of the downloaded dataset
+train: train/images    # Path to training images (relative to path)
+val: valid/images      # Path to validation images (relative to path)
+test: test/images      # Path to test images (optional, relative to path)
+
+# Number of classes
+nc: 12
+
+# Class Names mapped directly from the standard chess piece notation used in this project
+names:
+  0: black-bishop
+  1: black-king
+  2: black-knight
+  3: black-pawn
+  4: black-queen
+  5: black-rook
+  6: white-bishop
+  7: white-king
+  8: white-knight
+  9: white-pawn
+  10: white-queen
+  11: white-rook
