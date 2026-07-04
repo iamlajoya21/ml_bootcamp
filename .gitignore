@@ -14,5 +14,11 @@
 *.cache
 *.zip
 *.mp4
+*.safetensor*
+*.bin
 
 
+*.ipynb_checkpoints/
+catboost_info/
+results/
+*.pdf
