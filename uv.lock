@@ -764,6 +764,15 @@ http = [
 ]
 
 [[package]]
+name = "fuzzywuzzy"
+version = "0.18.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/11/4b/0a002eea91be6048a2b5d53c5f1b4dafd57ba2e36eea961d05086d7c28ce/fuzzywuzzy-0.18.0.tar.gz", hash = "sha256:45016e92264780e58972dca1b3d939ac864b78437422beecebb3095f8efd00e8", size = 28888, upload-time = "2020-02-13T21:06:27.054Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/43/ff/74f23998ad2f93b945c0309f825be92e04e0348e062026998b5eefef4c33/fuzzywuzzy-0.18.0-py2.py3-none-any.whl", hash = "sha256:928244b28db720d1e0ee7587acf660ea49d7e4c632569cad4f1cd7e68a5f0993", size = 18272, upload-time = "2020-02-13T21:06:25.209Z" },
+]
+
+[[package]]
 name = "gast"
 version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -970,6 +979,32 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1d/e6/718471048fea0366c3e3d1df3acfd914ca66d571cdffcf6d37bbcd725708/immutabledict-4.3.1.tar.gz", hash = "sha256:f844a669106cfdc73f47b1a9da003782fb17dc955a54c80972e0d93d1c63c514", size = 7806, upload-time = "2026-02-15T10:32:34.668Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a3/ce/f9018bf69ae91b273b6391a095e7c93fa5e1617f25b6ba81ad4b20c9df10/immutabledict-4.3.1-py3-none-any.whl", hash = "sha256:c9facdc0ff30fdb8e35bd16532026cac472a549e182c94fa201b51b25e4bf7bf", size = 5000, upload-time = "2026-02-15T10:32:33.672Z" },
+]
+
+[[package]]
+name = "implicit"
+version = "0.7.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "scipy" },
+    { name = "threadpoolctl" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/32/24/bdaa4be7fcfb568d63e0ddff948c486515c6b728055ee060f3f131803476/implicit-0.7.3.tar.gz", hash = "sha256:9571a52d70b3667e99a6e6aae6681526dd3286c765cf0ea10e1073d068a98057", size = 443981, upload-time = "2026-05-14T04:36:05.331Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0e/ba/98265ef5379302f5d694585bdf1cc7b0ab90f6e54d06466d2a0e5019bd56/implicit-0.7.3-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:193ac8dc10614fc0db153a0bf3a7f53f4cbad094c1b7938c7f22c796e541a3bb", size = 1254747, upload-time = "2026-05-08T18:37:25.928Z" },
+    { url = "https://files.pythonhosted.org/packages/50/2e/e4c3a7ba2c144c9b237d15f9eb77b4df1011f287f0d6cbd41b75c5cc9e05/implicit-0.7.3-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:36bb093bad91479e9226846de59430848165c6e423c8959b191e009f04bd8619", size = 675890, upload-time = "2026-05-08T18:37:27.043Z" },
+    { url = "https://files.pythonhosted.org/packages/f0/8a/093ed80fff27ad9c188daeec68bbea507345c5fcfab58442e0e42430a653/implicit-0.7.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:00a7791b7b0a6a0802c95dc88a432e5af6beb19cd4a948196df98fb42a2a7d96", size = 644140, upload-time = "2026-05-08T18:37:28.341Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/61/6aa8760fa328f9ffcbf1104475819c0cfbe5f76ea260c8ee5b9dfbbeaeaa/implicit-0.7.3-cp313-cp313-manylinux2014_aarch64.whl", hash = "sha256:6a2caddac3ca46840bb8db5f8a7d386b00c9c708095e8df86919c737c3ceca8e", size = 851824, upload-time = "2026-05-08T18:37:29.692Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/5f/9e4a773cfa80409af06b89c98b642595a280a7648b70eed5aefd049b1d77/implicit-0.7.3-cp313-cp313-manylinux2014_x86_64.whl", hash = "sha256:71573a1083b33878032c44e4caa04c6853b0f1c959bf5460f4fb07e396267fc4", size = 7644257, upload-time = "2026-05-08T18:37:31.098Z" },
+    { url = "https://files.pythonhosted.org/packages/95/f7/d1172da1580dd5a51fd15b71146d12bc1b93c6312e598189360c4ca8ba8b/implicit-0.7.3-cp313-cp313-win_amd64.whl", hash = "sha256:395926a937cc75e89eecd5b9042df18b6b2dca826bb7e11b2abdff7584a2ea4e", size = 675331, upload-time = "2026-05-08T18:37:32.451Z" },
+    { url = "https://files.pythonhosted.org/packages/8a/51/508fd3b18f10499bac710fdcdf2832fe4ca9d9c0e98702dab3d4761a7270/implicit-0.7.3-cp314-cp314-macosx_10_15_universal2.whl", hash = "sha256:30b46876e27add6d65125fd9dc0b9af4a1b5667123cf76aefbd38bcdd23e69b4", size = 1264525, upload-time = "2026-05-08T18:37:33.496Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/d6/8784c71e7de78df3e5efbf7a0429e9b0cf51f5dedceb19ebe9e2351a9c9a/implicit-0.7.3-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:7299d2d127ba86199c5794d17db923f45d9ffe1b4eb5cdd3ba5aa64600dfbe2d", size = 679585, upload-time = "2026-05-08T18:37:34.964Z" },
+    { url = "https://files.pythonhosted.org/packages/b8/81/8fff25d12d58933edeb480a8f7ec8c5e4f971b0313c00b9e996ea1b70f33/implicit-0.7.3-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:53f6607bc2ec2c5f4b032e7a904a8cec7c6aa552bd844a69ad46ee65225cb1e0", size = 650208, upload-time = "2026-05-08T18:37:36.277Z" },
+    { url = "https://files.pythonhosted.org/packages/94/d9/50d64ed847a75afa8d58d754b07311cfe87dbdf1b2f5eb3e7664a69e162f/implicit-0.7.3-cp314-cp314-manylinux2014_aarch64.whl", hash = "sha256:7518514aaeb3348103a8bb31e15e45d1af1c4564403dd9dbe7d09c5e85ad8b83", size = 860951, upload-time = "2026-05-08T18:37:37.519Z" },
+    { url = "https://files.pythonhosted.org/packages/4d/6a/c4fda48bfe88ba0ad6afc19cd100bff37e692ffc13be60aefb0aaf12a135/implicit-0.7.3-cp314-cp314-manylinux2014_x86_64.whl", hash = "sha256:ec1f2c451685898de0379e12da29e6a50391164f4b21760cb4f06a35ff1a8e8f", size = 7647110, upload-time = "2026-05-08T18:37:38.785Z" },
+    { url = "https://files.pythonhosted.org/packages/5c/2c/4e0fb43210462b5c06e50f61780fa88ffd62bbc4c34516219d8c75ed0a54/implicit-0.7.3-cp314-cp314-win_amd64.whl", hash = "sha256:bf7424055ae22289e6d519b7e8bc31e7af8ea1e07a0ca6fd85c4d2f4822f3ae3", size = 692685, upload-time = "2026-05-08T18:37:40.028Z" },
 ]
 
 [[package]]
@@ -1307,6 +1342,8 @@ dependencies = [
     { name = "beautifulsoup4" },
     { name = "catboost" },
     { name = "datasets" },
+    { name = "fuzzywuzzy" },
+    { name = "implicit" },
     { name = "importlib-resources" },
     { name = "kagglehub" },
     { name = "lap" },
@@ -1338,6 +1375,8 @@ requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.15.0" },
     { name = "catboost", specifier = ">=1.2.10" },
     { name = "datasets", specifier = ">=5.0.0" },
+    { name = "fuzzywuzzy", specifier = ">=0.18.0" },
+    { name = "implicit", specifier = ">=0.7.3" },
     { name = "importlib-resources", specifier = ">=7.1.0" },
     { name = "kagglehub", specifier = ">=1.0.1" },
     { name = "lap", specifier = ">=0.5.13" },
