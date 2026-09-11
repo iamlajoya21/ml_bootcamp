@@ -120,14 +120,14 @@ def hybrid_search(
         Fused list of results sorted by combined score
     """
     if method == "rrf":
-        return _reciprocal_rank_fusion(semantic_results, bm25_results, k)
+        return reciprocal_rank_fusion(semantic_results, bm25_results, k)
     elif method == "weighted":
-        return _weighted_fusion(semantic_results, bm25_results)
+        return weighted_fusion(semantic_results, bm25_results)
     else:
         raise ValueError(f"Unknown fusion method: {method}")
 
 
-def _reciprocal_rank_fusion(
+def reciprocal_rank_fusion(
     results_list1: List[Dict[str, Any]],
     results_list2: List[Dict[str, Any]],
     k: int = 60
@@ -156,7 +156,7 @@ def _reciprocal_rank_fusion(
     return sorted_docs
 
 
-def _weighted_fusion(
+def weighted_fusion(
     results_list1: List[Dict[str, Any]],
     results_list2: List[Dict[str, Any]],
     weight1: float = 0.7,
