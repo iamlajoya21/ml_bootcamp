@@ -9,7 +9,7 @@ echo "Setting up RAG Teaching Materials..."
 python -m venv .venv
 
 # Install dependencies
-pip install -r requirements.txt
+.venv/bin/pip install -r requirements.txt
 
 # Copy environment file
 if [ ! -f .env ]; then
