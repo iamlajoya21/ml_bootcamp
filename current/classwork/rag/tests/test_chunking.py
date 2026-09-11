@@ -47,3 +47,21 @@ def test_get_chunk_stats():
     assert stats['avg_length'] > 0
     assert stats['min_length'] == len("Short")
     assert stats['max_length'] == len("This is a longer piece of text for testing")
+
+
+def test_chunk_text_overlap_validation():
+    """Test that overlap >= chunk_size raises ValueError."""
+    text = "Test text for validation"
+    with pytest.raises(ValueError):
+        chunk_text(text, method="fixed", chunk_size=100, overlap=100)
+    with pytest.raises(ValueError):
+        chunk_text(text, method="fixed", chunk_size=100, overlap=150)
+
+
+def test_chunk_text_size_validation():
+    """Test that chunk_size <= 0 raises ValueError."""
+    text = "Test text for validation"
+    with pytest.raises(ValueError):
+        chunk_text(text, method="fixed", chunk_size=0, overlap=0)
+    with pytest.raises(ValueError):
+        chunk_text(text, method="fixed", chunk_size=-10, overlap=0)

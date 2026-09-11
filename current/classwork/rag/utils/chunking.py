@@ -20,6 +20,11 @@ def chunk_text(
     Returns:
         List of text chunks
     """
+    if chunk_size <= 0:
+        raise ValueError("chunk_size must be greater than 0")
+    if overlap < 0 or (method == "fixed" and overlap >= chunk_size):
+        raise ValueError("overlap must be non-negative and less than chunk_size")
+    
     if method == "fixed":
         return _fixed_size_chunking(text, chunk_size, overlap)
     elif method == "recursive":
