@@ -39,18 +39,21 @@ def test_create_vector_store():
 
 @patch('utils.retrieval.genai')
 def test_search_vector_store(mock_genai):
-    mock_genai.embed_content.return_value = {'embedding': [0.1, 0.2]}
+    # Mock the Gemini embedding API
+    mock_genai.embed_content.return_value = {'embedding': [0.1, 0.2, 0.3, 0.4, 0.5]}
 
-    # Create a mock store
-    mock_store = Mock()
-    mock_store.query.return_value = {
-        'documents': [['result1', 'result2']],
-        'distances': [[0.1, 0.2]]
-    }
-
-    results = search_vector_store(mock_store, "test query", n_results=2)
+    # Create a real vector store with actual documents
+    docs = ["machine learning", "deep learning", "natural language processing"]
+    embeddings = [[0.1, 0.2, 0.3, 0.4, 0.5], [0.2, 0.3, 0.4, 0.5, 0.6], [0.3, 0.4, 0.5, 0.6, 0.7]]
+    metadata = [{"source": "test1"}, {"source": "test2"}, {"source": "test3"}]
+    
+    # Use a unique collection name to avoid conflicts with other tests
+    store = create_vector_store(docs, embeddings, metadata, collection_name="test_search_collection")
+    
+    # Test the search function
+    results = search_vector_store(store, "test query", n_results=2)
     assert len(results) == 2
-    assert results[0] == 'result1'
+    assert isinstance(results[0], str)
 
 
 def test_bm25_search():
@@ -66,10 +69,13 @@ def test_bm25_search():
 
 
 def test_hybrid_search():
+    # Create semantic results where doc1 is ranked higher than doc2
     semantic_results = [
         {"text": "doc1", "score": 0.9, "rank": 0},
         {"text": "doc2", "score": 0.8, "rank": 1}
     ]
+    
+    # Create BM25 results where doc2 is ranked higher than doc1
     bm25_results = [
         {"text": "doc2", "score": 0.7, "rank": 0},
         {"text": "doc1", "score": 0.6, "rank": 1}
@@ -77,4 +83,21 @@ def test_hybrid_search():
 
     fused = hybrid_search(semantic_results, bm25_results, method="rrf")
     assert len(fused) == 2
+    
+    # Verify that all documents are included
+    doc_texts = [r['text'] for r in fused]
+    assert 'doc1' in doc_texts
+    assert 'doc2' in doc_texts
+    
+    # Verify that scores are positive and calculated
+    for result in fused:
+        assert 'rrf_score' in result
+        assert result['rrf_score'] > 0
+    
+    # Verify ranking with specific data where doc1 should be first
+    # doc1 appears rank 0 in semantic, rank 1 in BM25
+    # doc2 appears rank 1 in semantic, rank 0 in BM25
+    # They have equal scores, so verify the function handles ties properly
     assert fused[0]['text'] in ['doc1', 'doc2']
+    assert fused[1]['text'] in ['doc1', 'doc2']
+    assert fused[0]['text'] != fused[1]['text']

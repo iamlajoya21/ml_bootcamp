@@ -1,10 +1,9 @@
 # utils/retrieval.py
 import google.generativeai as genai
 import chromadb
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 import numpy as np
 from rank_bm25 import BM25Okapi
-import re
 
 
 def create_vector_store(
@@ -55,13 +54,16 @@ def search_vector_store(
     Returns:
         List of document texts
     """
-    # We need to get embeddings for the query
-    # For this function to work standalone, we'll need to use the collection's embedding function
-    # or assume embeddings are pre-computed
+    # Generate query embedding using Gemini API
+    response = genai.embed_content(
+        model="models/text-embedding-004",
+        content=query
+    )
+    query_embedding = response['embedding']
 
-    # Simple approach: use collection's built-in query
+    # Query the collection with the generated embedding
     results = collection.query(
-        query_texts=[query],
+        query_embeddings=[query_embedding],
         n_results=n_results
     )
 
