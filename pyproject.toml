@@ -10,6 +10,7 @@ dependencies = [
     "catboost>=1.2.10",
     "datasets>=5.0.0",
     "fuzzywuzzy>=0.18.0",
+    "google-cloud-aiplatform>=2.1.0",
     "implicit>=0.7.3",
     "importlib-resources>=7.1.0",
     "kagglehub>=1.0.1",
